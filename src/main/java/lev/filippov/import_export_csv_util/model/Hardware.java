@@ -1,22 +1,21 @@
 package lev.filippov.import_export_csv_util.model;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-@Entity
-@Setter
 @Getter
-@Inheritance(strategy = InheritanceType.JOINED)
-//@DiscriminatorColumn(name = "BD_TYPE")
-public class Hardware implements Serializable {
+@Setter
+@Entity
+@Table(name = "hardwares")
+public class Hardware implements Comparable<Hardware> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "type")
     private String name;
@@ -34,13 +33,24 @@ public class Hardware implements Serializable {
     @Column(name = "quantity")
     private Integer quantity;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "hardware")
+    Set<Parameter> parameters = new HashSet<>();
+
     @Override
     public String toString() {
-        return  "id=" + id +
+        return "Hardware{" +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", serialNumber='" + serialNumber + '\'' +
                 ", manufacturer=" + manufacturer +
                 ", price=" + price +
-                ", quantity=" + quantity;
+                ", quantity=" + quantity +
+                ", parameters=" + parameters +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Hardware o) {
+        return this.getName().compareTo(o.getName());
     }
 }

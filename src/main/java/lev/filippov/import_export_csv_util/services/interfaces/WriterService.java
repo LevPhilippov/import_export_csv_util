@@ -1,6 +1,6 @@
 package lev.filippov.import_export_csv_util.services.interfaces;
 
-import lev.filippov.importexportcsvutil.model.Hardware;
+import lev.filippov.import_export_csv_util.model.Hardware;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,11 +1,11 @@
 package lev.filippov.import_export_csv_util.services.interfaces;
 
-import lev.filippov.importexportcsvutil.services.RawObject;
+import lev.filippov.import_export_csv_util.model.Hardware;
 
 import java.io.File;
-import java.util.List;
+import java.util.Set;
 
 public interface CsvParserService {
 
-    List<RawObject> parse(File link);
+    Set<Hardware> parse(File link);
 }

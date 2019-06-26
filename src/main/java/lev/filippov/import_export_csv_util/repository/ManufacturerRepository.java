@@ -1,6 +1,6 @@
 package lev.filippov.import_export_csv_util.repository;
 
-import lev.filippov.importexportcsvutil.model.Manufacturer;
+import lev.filippov.import_export_csv_util.model.Manufacturer;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

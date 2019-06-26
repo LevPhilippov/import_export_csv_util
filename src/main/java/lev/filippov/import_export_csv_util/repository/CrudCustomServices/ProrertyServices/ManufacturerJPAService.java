@@ -1,18 +1,17 @@
 package lev.filippov.import_export_csv_util.repository.CrudCustomServices.ProrertyServices;
 
-import lev.filippov.importexportcsvutil.model.Manufacturer;
-import lev.filippov.importexportcsvutil.repository.EntityCrudInterfaces.ManufacturerCrudService;
-import lev.filippov.importexportcsvutil.repository.ManufacturerRepository;
+import lev.filippov.import_export_csv_util.model.Manufacturer;
+import lev.filippov.import_export_csv_util.repository.EntityCrudInterfaces.ManufacturerCrudService;
+import lev.filippov.import_export_csv_util.repository.ManufacturerRepository;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
-@Profile("custom")
 public class ManufacturerJPAService implements ManufacturerCrudService {
+
     private final ManufacturerRepository manufacturerRepository;
 
     public ManufacturerJPAService(ManufacturerRepository manufacturerRepository) {
@@ -28,9 +27,9 @@ public class ManufacturerJPAService implements ManufacturerCrudService {
     public Manufacturer save(Manufacturer object) {
         if(object != null) {
             if(object.getId() == null) {
-                Optional<Manufacturer> opt = manufacturerRepository.getByName(object.getName());
-                if(opt.isPresent()){
-                    return opt.get();
+                Manufacturer savedMan = findByParameters(object);
+                if(savedMan != null){
+                    return savedMan;
                 } else {
                     return manufacturerRepository.save(object);
                 }
@@ -56,5 +55,10 @@ public class ManufacturerJPAService implements ManufacturerCrudService {
     @Override
     public void delete(Manufacturer object) {
         manufacturerRepository.delete(object);
+    }
+
+    @Override
+    public Manufacturer findByParameters(Manufacturer object) {
+        return manufacturerRepository.getByName(object.getName()).orElse(null);
     }
 }
