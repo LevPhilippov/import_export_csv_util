@@ -22,6 +22,10 @@ public class STDINServiceImpl implements STDInService {
     public void runSTDIN(){
         new Thread(() -> {
             Scanner scanner = new Scanner(System.in);
+            System.out.println("Welcome!\nUse commands:\n[import] [absolute or local link to .csv for import file]\n" +
+                    "[export] [absolute or local link to .txt for export file] for exporting data\n" +
+                    "Note that if your export lint points at unexisting folder/s they will be created automatically!\n" +
+                    "[exit] or [end] to terminate the app.");
             while(scanner.hasNextLine()) {
                 String command = scanner.nextLine().trim();
                 File file = null;
@@ -63,10 +67,10 @@ public class STDINServiceImpl implements STDInService {
                 } else if(command.startsWith("end") || command.startsWith("exit")) {
                     System.exit(1);
                 } else if (command.startsWith("help")) {
-                    System.out.println("Use commands:\n import [absolute or local link to .csv for reading file]\n " +
-                            "export [absolute or local link to .csv for reading file] for exporting data\n" +
+                    System.out.println("Use commands:\n [import] [absolute or local link to .csv for import file]\n " +
+                            "[export] [absolute or local link to .txt for export file] for exporting data\n" +
                             "Note that if your export lint points at unexisting folder/s they will be created automatically!\n" +
-                            "exit or end to terminate the app.");
+                            "[exit] or [end] to terminate the app.");
                 } else {
                     System.out.println(command + " <- Unknown command, please use command: help");
                 }
@@ -75,6 +79,4 @@ public class STDINServiceImpl implements STDInService {
         }).start();
     }
 
-
-    //TODO refactor to Threadpools
 }

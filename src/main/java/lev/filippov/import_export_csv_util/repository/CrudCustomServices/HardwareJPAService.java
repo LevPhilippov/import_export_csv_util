@@ -1,15 +1,16 @@
-package lev.filippov.import_export_csv_util.repository.CrudCustomServices.HarwareServices;
+package lev.filippov.import_export_csv_util.repository.CrudCustomServices;
 
 import lev.filippov.import_export_csv_util.model.Hardware;
-import lev.filippov.import_export_csv_util.repository.CrudCustomServices.ProrertyServices.ManufacturerJPAService;
 import lev.filippov.import_export_csv_util.repository.EntityCrudInterfaces.HardwareCrudService;
 import lev.filippov.import_export_csv_util.repository.HardwareRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class HardwareJPAService implements HardwareCrudService {
 
     private final ManufacturerJPAService manufacturerJPAService;
@@ -31,11 +32,11 @@ public class HardwareJPAService implements HardwareCrudService {
             if(object.getId() == null) {
                 Hardware savedHardware = findByParameters(object);
                 if(savedHardware != null){
-                    System.out.println("Updating!");
+                    log.info("\"Updating!\"");
                     savedHardware.setQuantity(savedHardware.getQuantity() + object.getQuantity());
                     return hardwareRepository.save(savedHardware);
                 }
-                System.out.println("Saving!");
+                log.info("\"Saving!\"");
                 object.setManufacturer(manufacturerJPAService.save(object.getManufacturer()));
                 return hardwareRepository.save(object);
             }

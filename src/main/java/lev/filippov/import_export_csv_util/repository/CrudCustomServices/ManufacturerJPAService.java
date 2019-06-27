@@ -1,9 +1,8 @@
-package lev.filippov.import_export_csv_util.repository.CrudCustomServices.ProrertyServices;
+package lev.filippov.import_export_csv_util.repository.CrudCustomServices;
 
 import lev.filippov.import_export_csv_util.model.Manufacturer;
 import lev.filippov.import_export_csv_util.repository.EntityCrudInterfaces.ManufacturerCrudService;
 import lev.filippov.import_export_csv_util.repository.ManufacturerRepository;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;

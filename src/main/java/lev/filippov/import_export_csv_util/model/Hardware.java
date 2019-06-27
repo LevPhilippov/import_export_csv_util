@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -52,5 +53,22 @@ public class Hardware implements Comparable<Hardware> {
     @Override
     public int compareTo(Hardware o) {
         return this.getName().compareTo(o.getName());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hardware hardware = (Hardware) o;
+        return Objects.equals(name, hardware.name) &&
+                Objects.equals(serialNumber, hardware.serialNumber) &&
+                Objects.equals(manufacturer, hardware.manufacturer) &&
+                Objects.equals(price, hardware.price) &&
+                Objects.equals(parameters, hardware.parameters);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, serialNumber, manufacturer, price, parameters);
     }
 }

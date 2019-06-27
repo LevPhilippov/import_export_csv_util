@@ -7,17 +7,16 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Set;
 
 @Service
-public class CsvHandlerServiceCrudImpl implements CsvHandlerService {
+public class CsvHandlerServiceImpl implements CsvHandlerService {
 
     private final CsvParserService csvParserService;
     private final WriterService writerService;
     private final HardwareCrudService hardwareCrudService;
 
-    public CsvHandlerServiceCrudImpl(CsvParserService csvParserService, WriterService writerService, HardwareCrudService hardwareCrudService) {
+    public CsvHandlerServiceImpl(CsvParserService csvParserService, WriterService writerService, HardwareCrudService hardwareCrudService) {
         this.csvParserService = csvParserService;
         this.writerService = writerService;
         this.hardwareCrudService = hardwareCrudService;
